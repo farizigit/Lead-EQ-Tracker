@@ -1,0 +1,8 @@
+[start]
+cmd = "nginx -g 'daemon off;'"
+
+[build]
+# This tells Nixpacks to copy the contents of 'lead-eq-tracker' directly
+# to the /app directory in the build image, without looking for a 'dist' folder.
+# The `publish_directory` in Coolify will then serve from this /app.
+# No build command is needed for a pure static site.
