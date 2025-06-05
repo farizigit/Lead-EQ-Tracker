@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lead Equipment Tracker</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div id="app">
+        <!-- Authentication Section -->
+        <section id="auth-section" class="page active">
+            <h2>Welcome to Lead EQ Tracker</h2>
+            <form id="signup-form" class="auth-form hidden">
+                <h3>Sign Up</h3>
+                <input type="text" id="signup-username" placeholder="Username" required>
+                <input type="email" id="signup-email" placeholder="Email" required>
+                <input type="password" id="signup-password" placeholder="Password" required>
+                <button type="submit">Sign Up</button>
+                <p>Already have an account? <a href="#" id="show-login">Login</a></p>
+            </form>
+            <form id="login-form" class="auth-form">
+                <h3>Login</h3>
+                <input type="email" id="login-email" placeholder="Email" required>
+                <input type="password" id="login-password" placeholder="Password" required>
+                <button type="submit">Login</button>
+                <p>Don't have an account? <a href="#" id="show-signup">Sign Up</a></p>
+            </form>
+            <p id="auth-message" class="message"></p>
+        </section>
+
+        <!-- Dashboard Section -->
+        <section id="dashboard-section" class="page hidden">
+            <header class="dashboard-header">
+                <div class="user-info">
+                    <h2 id="welcome-message">Hello, User</h2>
+                    <div class="profile-picture">
+                        <i class="fas fa-user-circle"></i>
+                    </div>
+                </div>
+                <div class="header-actions">
+                    <select id="sort-by-employee">
+                        <option value="">Sort by Employee</option>
+                        <!-- Employee options will be loaded here dynamically -->
+                    </select>
+                    <select id="filter-by-category">
+                        <option value="">All Categories</option>
+                        <option value="Camera">Camera</option>
+                        <option value="Lights">Lights</option>
+                        <option value="Lense">Lense</option>
+                        <option value="Sound">Sound</option>
+                        <option value="Misc">Misc</option>
+                    </select>
+                </div>
+            </header>
+            <div class="hero-section">
+                <div class="hero-card">
+                    <h3>Total Equipment</h3>
+                    <p id="total-equipment-count" class="hero-value">0</p>
+                </div>
+                <div class="hero-card">
+                    <h3>Available Equipment</h3>
+                    <p id="available-equipment-count" class="hero-value">0</p>
+                </div>
+            </div>
+            <div id="equipment-list">
+                <!-- Equipment cards will be loaded here -->
+            </div>
+            <p id="dashboard-message" class="message"></p>
+        </section>
+
+        <!-- Bottom Navigation Panel -->
+        <nav id="bottom-nav">
+            <button id="add-equipment-btn" class="nav-item">
+                <i class="fas fa-plus"></i>
+                <span>Add</span>
+            </button>
+            <button id="view-logs-btn" class="nav-item">
+                <i class="fas fa-clipboard-list"></i>
+                <span>Logs</span>
+            </button>
+            <button id="check-in-all-btn" class="nav-item">
+                <i class="fas fa-clipboard-check"></i>
+                <span>Check In All</span>
+            </button>
+            <button id="logout-btn" class="nav-item">
+                <i class="fas fa-sign-out-alt"></i>
+                <span>Logout</span>
+            </button>
+        </nav>
+
+        <!-- Add/Edit Equipment Section -->
+        <section id="add-edit-equipment-section" class="page hidden">
+            <header>
+                <h2 id="add-edit-title">Add New Equipment</h2>
+                <button id="back-to-dashboard-from-add-edit"><i class="fas fa-arrow-left"></i> Back to Dashboard</button>
+            </header>
+            <form id="equipment-form">
+                <input type="hidden" id="equipment-id">
+                <input type="text" id="equipment-name" placeholder="Equipment Name" required>
+                <textarea id="equipment-description" placeholder="Description"></textarea>
+                <input type="text" id="equipment-serial-number" placeholder="Serial Number">
+                <select id="equipment-category" required>
+                    <option value="">Select Category</option>
+                    <option value="Camera">Camera</option>
+                    <option value="Lights">Lights</option>
+                    <option value="Lense">Lense</option>
+                    <option value="Sound">Sound</option>
+                    <option value="Misc">Misc</option>
+                </select>
+                <button type="submit" id="save-equipment-btn">Save Equipment</button>
+            </form>
+            <p id="equipment-message" class="message"></p>
+        </section>
+
+        <!-- Equipment Details Section -->
+        <section id="equipment-details-section" class="page hidden">
+            <header>
+                <h2 id="detail-equipment-name"></h2>
+                <button id="back-to-dashboard-from-details"><i class="fas fa-arrow-left"></i> Back to Dashboard</button>
+            </header>
+            <div class="equipment-detail-card">
+                <p><strong>Description:</strong> <span id="detail-equipment-description"></span></p>
+                <p><strong>Serial Number:</strong> <span id="detail-equipment-serial-number"></span></p>
+                <p><strong>Category:</strong> <span id="detail-equipment-category"></span></p>
+                <p><strong>Status:</strong> <span id="detail-equipment-status"></span></p>
+                <p><strong>Current Holder:</strong> <span id="detail-current-holder">N/A</span></p>
+                <div class="detail-actions">
+                    <button id="edit-equipment-detail-btn"><i class="fas fa-edit"></i> Edit</button>
+                    <button id="check-out-btn" class="action-btn"><i class="fas fa-arrow-alt-circle-right"></i> Check Out</button>
+                    <button id="check-in-btn" class="action-btn"><i class="fas fa-arrow-alt-circle-left"></i> Check In</button>
+                    <button id="delete-equipment-btn" class="delete-btn"><i class="fas fa-trash-alt"></i> Delete</button>
+                </div>
+            </div>
+            <h3>Transaction History</h3>
+            <div id="transaction-history">
+                <!-- Transaction logs will be loaded here -->
+            </div>
+            <p id="details-message" class="message"></p>
+        </section>
+
+        <!-- Logs Section -->
+        <section id="logs-section" class="page hidden">
+            <header>
+                <h2>Activity Logs</h2>
+                <button id="back-to-dashboard-from-logs"><i class="fas fa-arrow-left"></i> Back to Dashboard</button>
+            </header>
+            <div id="activity-logs">
+                <!-- Activity logs will be loaded here -->
+            </div>
+            <p id="logs-message" class="message"></p>
+        </section>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
