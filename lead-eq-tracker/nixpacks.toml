@@ -1,0 +1,10 @@
+[start]
+cmd = "nginx -g 'daemon off;'"
+
+[build]
+# No build command needed for a pure static site.
+
+[staticfiles]
+# Explicitly tell Nixpacks where to find the static files.
+# This path is relative to the root of your Git repository.
+assets = "lead-eq-tracker"
